@@ -1,0 +1,22 @@
+bibentry(
+  bibtype = "manual",
+  key = "R-csranks",
+  title = "csranks: Confidence Sets for Ranks",
+  author = c("Daniel Wilhelm", "Pawel Morgen"),
+  note = "https://github.com/danielwilhelm/R-CS-ranks",
+  url = "https://danielwilhelm.github.io/R-CS-ranks/",
+  year = "2023"
+)
+
+bibentry(
+  bibtype="article",
+  key = "csranks2023",
+  title = "Inference for Ranks with Applications to Mobility across Neighborhoods and Academic Achievements across Countries",
+  author = c("Magne Mogstad", "Joseph Romano", "Azeem Shaikh", "Daniel Wilhelm"),
+  journal = "The Review of Economic Studies",
+  year = 2023,
+  month = 1,
+  issn = "0034-6527",
+  doi = "10.1093/restud/rdad006",
+  url = "http://dwilhelm.userweb.mwn.de/papers/cwp0323.pdf"
+)
