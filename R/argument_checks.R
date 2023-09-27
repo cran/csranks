@@ -128,21 +128,43 @@ check_plotranking_args <- function(ranks, L, U, popnames, title, subtitle,
   assert_is_single_logical(horizontal)
 }
 
-process_irank_args <- function(x, omega, increasing, na.rm){
+process_irank_against_args <- function(x, v, omega, increasing, na.rm){
   assert_is_numeric_vector(x, "x")
+  if(is.null(v))
+    v <- x
+  else
+    assert_is_numeric_vector(v, "v")
   assert_is_single_logical(na.rm, "na.rm")
   assert_is_single_probability(omega, "omega")
   assert_is_single_logical(increasing, "increasing")
-  if(!na.rm)
-    assert_has_no_NAs(x, "x")
-  else
+  if(!na.rm){
+    assert_has_no_NAs(v, "v")
+  } else {
+    v <- v[!is.na(v)]
     x <- x[!is.na(x)]
-  
+  }  
   if(!increasing){
+    v <- -v
     x <- -x
   }
   
-  return(x)
+  return(list(x=x, v=v))
+}
+
+check_grouping_variable <- function(object){
+  grouping_var_index <- get_grouping_var_index(object)
+  if(length(grouping_var_index) == 0) return()
+  grouping_var <- stats::model.frame(object)[,grouping_var_index]
+  grouping_var_name <- colnames(stats::model.frame(object))[grouping_var_index]
+  assert_is_factor(grouping_var, grouping_var_name)
+  
+  actual_contrast <- object$contrasts[[grouping_var_name]]
+  if(is.null(actual_contrast)){
+    actual_contrast <- object$contrasts[[paste0("`", grouping_var_name, "`")]]
+  }
+  if(actual_contrast != "contr.treatment")
+    cli::cli_abort(c("{.var {grouping_var_name}}'s contrasts must be \"contr.treatment\".",
+                     "x" = "{.var {grouping_var_name}}'s contrasts are \"{actual_contrast}\"."))
 }
 
 assert_is_between <- function(middle, lower, upper, middle_name, lower_name, upper_name){
@@ -235,6 +257,22 @@ assert_length <- function(x, name, length){
                      "x" = "{.var {name}} is of length {length(x)}."))
 }
 
+assert_equal_length <- function(..., names){
+  args <- list(...)
+  lengths <- sapply(args, function(v){
+    if(is.matrix(v))
+      nrow(v)
+    else
+      length(v)
+  })
+  is_equal <- lengths[1] == lengths
+  if(!all(is_equal)){
+    i <- which(!is_equal)[1]
+    cli::cli_abort(c("{.var {names}} must be of equal length.",
+                     "x" = "{.var {names[i]}} is of length {lengths[i]}, but {.var {names[1]}} is of length {lengths[1]}."))
+  }
+}
+
 assert_is_single_logical <- function(x, name){
   assert_is_vector(x, name)
   assert_is_single(x, name)
@@ -263,6 +301,12 @@ assert_is_character <- function(x, name, factor_ok = FALSE){
   assert_has_no_NAs(x, name)
 }
 
+assert_is_factor <- function(x, name){
+  if(!is.factor(x))
+    cli::cli_abort(c("{.var {name}} must be a factor.",
+                     "x" = "{.var {name}} is of {.cls {typeof(x)}} type, {.cls {class(x)}} class."))
+}
+
 assert_has_no_NAs <- function(x, name){
   if(any(is.na(x))){
     na_indices <- utils::head(which(is.na(x)))
@@ -271,7 +315,13 @@ assert_has_no_NAs <- function(x, name){
 }
 
 assert_is_vector <- function(x, name){
-  if(!is.atomic(x))
+  AsIs_index <- which(class(x) == "AsIs")
+  original_x_class <- class(x)
+  if(length(AsIs_index) > 0){
+    class(x) <- class(x)[-AsIs_index]
+  }
+  if(!is.atomic(x) || !is.vector(x) && !is.factor(x))
     cli::cli_abort(c("{.var {name}} must be a vector.",
                      "x" = "{.var {name}} is of {.cls {class(x)}} class."))
+  class(x) <- original_x_class
 }
