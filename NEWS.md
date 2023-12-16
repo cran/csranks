@@ -1,3 +1,9 @@
+# csranks 1.2.1
+
+* Added new datasets, `pisa2018` and `pisa2022`
+* Updated CITATION and references
+* Bugfix of `plot.csranks` with non default `indices`
+
 # csranks 1.2.0
 * Public release with contents of 1.1 (Rank-rank linear regression)
 * Added a new mode for regression with clustered (grouped) data

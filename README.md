@@ -21,7 +21,7 @@ their theoretical properties. The confidence sets for ranks are based on
 Romano, Shaikh, and Wilhelm
 (2022)](https://dwilhelm.userweb.mwn.de/papers/cwp4021.pdf). The
 inference methods for regressions involving ranks are developed in
-Chetverikov and Wilhelm (2023).
+[Chetverikov and Wilhelm (2023)](https://arxiv.org/pdf/2310.15512).
 
 ## Installation
 
@@ -38,3 +38,15 @@ You can install the development version of `csranks` from
 # install.packages("remotes")
 remotes::install_github("danielwilhelm/R-CS-ranks")
 ```
+
+## Demo
+
+If you want to play around with the confidence sets for ranks, feel free
+to try out [demo available
+here](https://dwilhelm.shinyapps.io/R-CS-ranks-demo/).
+
+Here is a sneak peek:
+
+<center>
+<img src="https://github.com/danielwilhelm/R-CS-ranks/raw/master/inst/shiny-demo-v1.gif">
+</center>
