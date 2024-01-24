@@ -1,7 +1,6 @@
-cf6173b19942c9b2dbed547f435e2f40 *DESCRIPTION
-e92bf6f1ebe2ea1ec029bfc6b8ce840a *LICENSE
+2e4de2820a3f02adb5bd2426147aac8c *DESCRIPTION
 07feb464df02769dc408b6628d54c7b7 *NAMESPACE
-9e606cbe489dd9edefb7896a66b463ad *NEWS.md
+7d25bfa5585ceeeb86d4431060a111bd *NEWS.md
 5fabac79bbf9d696972d48fc58a29afa *R/argument_checks.R
 af4ab3b0e6312209210fbfc8be56e533 *R/csranks-package.R
 58e6b2731ecf95c1a9bb0cdb12a02b0b *R/data.R
@@ -26,7 +25,7 @@ f32e95273d332c6109a02cdf58e08a11 *data/pisa2022.rda
 ea7efb6afdf7eece1b4284100f72f89f *inst/CITATION
 d6e864e0012a3dbec116bc9eb5e28054 *inst/WORDLIST
 ff1de6442dcbdd17b8f7aba9ca83949f *inst/doc/Inference-for-Ranks.R
-be247eef9f524e5d2b88ef9b862f7211 *inst/doc/Inference-for-Ranks.html
+e37e8cd8e611838bcd7c1f2b81170ad9 *inst/doc/Inference-for-Ranks.html
 3e448b05a2511781621daae19fdce904 *inst/doc/Inference-for-Ranks.rmd
 1d7b534318f4870306b413fe9f83b4f5 *inst/doc/Rank-Rank-Reg.R
 4145e2006ee321a7e46679f5a60ce569 *inst/doc/Rank-Rank-Reg.html
