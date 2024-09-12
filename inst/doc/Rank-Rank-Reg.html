@@ -389,25 +389,20 @@ between parents’ and children’s incomes can be estimated by running a
 regression of a child’s income rank on the parent’s income rank:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>lmr_model <span class="ot">&lt;-</span> <span class="fu">lmranks</span>(<span class="fu">r</span>(c_faminc) <span class="sc">~</span> <span class="fu">r</span>(p_faminc), <span class="at">data=</span>parent_child_income)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">summary</span>(lmr_model)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; The number of residual degrees of freedom is not correct.</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Also, z-value, not t-value, since the distribution used for p-value calculation</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; is standard normal.</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc), data = parent_child_income)</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc), data = parent_child_income)</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; -0.65601 -0.21986 -0.00376  0.22088  0.66495 </span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; (Intercept) 0.312311   0.007161   43.61   &lt;2e-16 ***</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; r(p_faminc) 0.375538   0.014319   26.23   &lt;2e-16 ***</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; Residual standard error: NA on 3892 degrees of freedom</span></span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; -0.65601 -0.21986 -0.00376  0.22088  0.66495 </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; (Intercept) 0.312311   0.007161   43.61   &lt;2e-16 ***</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; r(p_faminc) 0.375538   0.014319   26.23   &lt;2e-16 ***</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <p>This regression specification takes each child’s income
 (<code>c_faminc</code>), computes its rank among all children’s incomes,
 then takes each parent’s income (<code>p_faminc</code>) and computes its
@@ -449,29 +444,24 @@ uncertainty in the ranks.</p>
 e.g.:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>lmr_model_cov <span class="ot">&lt;-</span> <span class="fu">lmranks</span>(<span class="fu">r</span>(c_faminc) <span class="sc">~</span> <span class="fu">r</span>(p_faminc) <span class="sc">+</span> gender <span class="sc">+</span> race, <span class="at">data=</span>parent_child_income)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(lmr_model_cov)</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; The number of residual degrees of freedom is not correct.</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Also, z-value, not t-value, since the distribution used for p-value calculation</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; is standard normal.</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc) + gender + race, </span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;     data = parent_child_income)</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; -0.66140 -0.20654 -0.00343  0.21421  0.72917 </span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; (Intercept)  0.299823   0.018155  16.514  &lt; 2e-16 ***</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; r(p_faminc)  0.323785   0.015123  21.411  &lt; 2e-16 ***</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; gendermale   0.010862   0.008484   1.280  0.20042    </span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; raceblack   -0.088215   0.020910  -4.219 2.46e-05 ***</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; raceneither  0.055726   0.018781   2.967  0.00301 ** </span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; Residual standard error: NA on 3889 degrees of freedom</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc) + gender + race, </span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;     data = parent_child_income)</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; -0.66140 -0.20654 -0.00343  0.21421  0.72917 </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; (Intercept)  0.299823   0.018155  16.514  &lt; 2e-16 ***</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; r(p_faminc)  0.323785   0.015123  21.411  &lt; 2e-16 ***</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; gendermale   0.010862   0.008484   1.280  0.20042    </span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; raceblack   -0.088215   0.020910  -4.219 2.46e-05 ***</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; raceneither  0.055726   0.018781   2.967  0.00301 ** </span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 </div>
 <div id="grouped-rank-rank-regression" class="section level3">
 <h3>Grouped rank-rank regression</h3>
@@ -487,27 +477,22 @@ function and interaction notation:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>grouped_lmr_model_simple <span class="ot">&lt;-</span> <span class="fu">lmranks</span>(<span class="fu">r</span>(c_faminc) <span class="sc">~</span> <span class="fu">r</span>(p_faminc_rank)<span class="sc">:</span>gender, </span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                             <span class="at">data=</span>parent_child_income)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">summary</span>(grouped_lmr_model_simple)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; The number of residual degrees of freedom is not correct.</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Also, z-value, not t-value, since the distribution used for p-value calculation</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; is standard normal.</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc_rank):gender, data = parent_child_income)</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc_rank):gender, data = parent_child_income)</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; -0.65016 -0.21977 -0.00308  0.21750  0.68833 </span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt;                               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; genderfemale                   0.28796    0.01119   25.74   &lt;2e-16 ***</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; gendermale                     0.33506    0.01107   30.27   &lt;2e-16 ***</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):genderfemale  0.40800    0.02046   19.94   &lt;2e-16 ***</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):gendermale    0.34516    0.02044   16.89   &lt;2e-16 ***</span></span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co">#&gt; Residual standard error: NA on 3890 degrees of freedom</span></span></code></pre></div>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; -0.65016 -0.21977 -0.00308  0.21750  0.68833 </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt;                               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; genderfemale                   0.28796    0.01119   25.74   &lt;2e-16 ***</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; gendermale                     0.33506    0.01107   30.27   &lt;2e-16 ***</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):genderfemale  0.40800    0.02046   19.94   &lt;2e-16 ***</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):gendermale    0.34516    0.02044   16.89   &lt;2e-16 ***</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <p>In this example, we have run a separate OLS regression of children’s
 ranks on parents’ ranks among the female and male children. However,
 incomes of children are ranked among all children and incomes of parents
@@ -551,48 +536,43 @@ characteristics such as gender and race:</p>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>grouped_lmr_model <span class="ot">&lt;-</span> <span class="fu">lmranks</span>(<span class="fu">r</span>(c_faminc) <span class="sc">~</span> <span class="fu">r</span>(p_faminc_rank)<span class="sc">:</span>subgroup, </span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                             <span class="at">data=</span>parent_child_income)</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">summary</span>(grouped_lmr_model)</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; The number of residual degrees of freedom is not correct.</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; Also, z-value, not t-value, since the distribution used for p-value calculation</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; is standard normal.</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc_rank):subgroup, data = parent_child_income)</span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; lmranks(formula = r(c_faminc) ~ r(p_faminc_rank):subgroup, data = parent_child_income)</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; -0.65574 -0.20769 -0.00387  0.21297  0.73248 </span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt;                                         Estimate Std. Error t value Pr(&gt;|t|)</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.hisp                      0.26280    0.03268   8.041 8.94e-16</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; subgroupmale.hisp                        0.35313    0.04516   7.820 5.26e-15</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.black                     0.19741    0.01968  10.031  &lt; 2e-16</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; subgroupmale.black                       0.26496    0.02702   9.805  &lt; 2e-16</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.neither                   0.35096    0.01525  23.006  &lt; 2e-16</span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; subgroupmale.neither                     0.36603    0.01322  27.694  &lt; 2e-16</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.hisp     0.41733    0.07602   5.490 4.02e-08</span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.hisp       0.21780    0.09697   2.246 0.024694</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.black    0.30798    0.05154   5.976 2.29e-09</span></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.black      0.25528    0.07234   3.529 0.000417</span></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.neither  0.33908    0.02532  13.390  &lt; 2e-16</span></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.neither    0.31818    0.02270  14.018  &lt; 2e-16</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt;                                            </span></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.hisp                     ***</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt; subgroupmale.hisp                       ***</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.black                    ***</span></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt; subgroupmale.black                      ***</span></span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.neither                  ***</span></span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#&gt; subgroupmale.neither                    ***</span></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.hisp    ***</span></span>
-<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.hisp      *  </span></span>
-<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.black   ***</span></span>
-<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.black     ***</span></span>
-<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.neither ***</span></span>
-<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.neither   ***</span></span>
-<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
-<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="co">#&gt; Residual standard error: NA on 3882 degrees of freedom</span></span></code></pre></div>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; -0.65574 -0.20769 -0.00387  0.21297  0.73248 </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt;                                         Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.hisp                      0.26280    0.03268   8.041 8.94e-16</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; subgroupmale.hisp                        0.35313    0.04516   7.820 5.26e-15</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.black                     0.19741    0.01968  10.031  &lt; 2e-16</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; subgroupmale.black                       0.26496    0.02702   9.805  &lt; 2e-16</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.neither                   0.35096    0.01525  23.006  &lt; 2e-16</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; subgroupmale.neither                     0.36603    0.01322  27.694  &lt; 2e-16</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.hisp     0.41733    0.07602   5.490 4.02e-08</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.hisp       0.21780    0.09697   2.246 0.024694</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.black    0.30798    0.05154   5.976 2.29e-09</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.black      0.25528    0.07234   3.529 0.000417</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.neither  0.33908    0.02532  13.390  &lt; 2e-16</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.neither    0.31818    0.02270  14.018  &lt; 2e-16</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt;                                            </span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.hisp                     ***</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; subgroupmale.hisp                       ***</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.black                    ***</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt; subgroupmale.black                      ***</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt; subgroupfemale.neither                  ***</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; subgroupmale.neither                    ***</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.hisp    ***</span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.hisp      *  </span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.black   ***</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.black     ***</span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupfemale.neither ***</span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt; r(p_faminc_rank):subgroupmale.neither   ***</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <p>Let’s compare the confidence intervals for regression coefficients
 produced by <code>lmranks</code> and naive approaches.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>grouped_lm_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(c_faminc_rank <span class="sc">~</span> p_faminc_rank<span class="sc">:</span>subgroup <span class="sc">+</span> subgroup <span class="sc">-</span> <span class="dv">1</span>, <span class="co">#group-wise intercept</span></span>
@@ -686,8 +666,8 @@ large.</p>
 </div>
 <div id="reference-further-reading" class="section level2">
 <h2>Reference &amp; further reading</h2>
-<p><a href="https://arxiv.org/pdf/2310.15512.pdf">Chetverikov and
-Wilhelm (2023), “Inference for Rank-Rank Regressions”. arXiv preprint
+<p><a href="http://arxiv.org/pdf/2310.15512">Chetverikov and Wilhelm
+(2023), “Inference for Rank-Rank Regressions”. arXiv preprint
 arXiv:2310.15512</a></p>
 <p>Check out the documentation of individual functions at the package’s
 <a href="https://danielwilhelm.github.io/R-CS-ranks/">website</a> and
