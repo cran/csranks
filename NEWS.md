@@ -1,3 +1,10 @@
+# csranks 1.3.0
+* Implemented `vcov.ivregranks`.
+* Implemented `ivregranks` - an extension of `ivreg::ivreg` for instrumental variable
+regression for ranked variables.
+* Added `weights` argument to `lmranks` command.
+* Implemented covariance matrix estimation for weighted regression with ranks.
+
 # csranks 1.2.3
 * Fixed S3 inheritance for the `proj` method of `lmranks`. Added it to `lmranks` documentation page.
 * Changed column names of `coefficients` in `summary.lmranks` from `t value` to `z value` and from `Pr(<|t|)` to `Pr(<|z|)`.

@@ -1,0 +1,135 @@
+library(MASS)
+library(dplyr)
+library(csranks)
+theta_vals <- c(0.3, 0.7)
+kappa_3_vals <- 2 * sin(pi / 6 * theta_vals)
+
+# Compute corresponding k2 values to render rho = 0.5
+kappa_2_vals <- 2 * sin(0.5 * asin(kappa_3_vals / 2))
+
+# Compute k1 accordingly to acchieve different levels of wished Endogeneity
+# Solve analytically when Endogeneity = 0
+get_k1_zero <- function(kappa_2, kappa_3) {
+  rho <- asin(kappa_2 / 2) / asin(kappa_3 / 2)
+  return(2 * sin((pi / 6) * rho))
+}
+
+# Solve via optimization for other Endogeneity targets
+get_k1_for_endog <- function(kappa_2, kappa_3, target_endog) {
+  rho <- asin(kappa_2 / 2) / asin(kappa_3 / 2)
+
+  f <- function(k1) {
+    var_eps <- 1 / 12 + rho^2 / 12 - rho / pi * asin(k1 / 2)
+    var_nu <- 1 / 12 + (6 / pi * asin(kappa_3 / 2))^2 / 12 - (6 / pi * asin(kappa_3 / 2)) / pi * asin(kappa_3 / 2)
+    cov_eps_nu <- 1 / (2 * pi) * asin(k1 / 2) - 1 / 12 * rho
+
+    if (var_eps <= 0 || var_nu <= 0) {
+      return(Inf)
+    }
+
+    return(abs(target_endog - cov_eps_nu / (sqrt(var_eps) * sqrt(var_nu))))
+  }
+
+  return(optimize(f, interval = c(-1, 1))$minimum)
+}
+
+# Construct the grid
+kappa_grid <- data.frame()
+for (i in 1:length(kappa_3_vals)) {
+  k3 <- kappa_3_vals[i]
+  k2 <- kappa_2_vals[i]
+
+  k1_zero <- get_k1_zero(k2, k3)
+  k1_03 <- get_k1_for_endog(k2, k3, 0.3)
+  k1_07 <- get_k1_for_endog(k2, k3, 0.7)
+
+  kappa_grid <- rbind(
+    kappa_grid,
+    data.frame(
+      kappa_1 = c(k1_zero, k1_03, k1_07),
+      kappa_2 = k2,
+      kappa_3 = k3,
+      Endogeneity_Target = c(0, 0.3, 0.7)
+    )
+  )
+}
+
+params <- expand.grid(n = c(500, 1000, 5000)) %>%
+  merge(kappa_grid, by = NULL) # Merge to replicate for each sample size
+
+params$Instrument_Strength <- c(rep(0.3, 9), rep(0.7, 9))
+params$mu <- list(c(2, 1, 0))
+
+
+gen_data <- function(n, kappa_1, kappa_2, kappa_3, mu) {
+  # Define covariance matrix
+  Sigma <- matrix(
+    c(
+      1, kappa_1, kappa_2,
+      kappa_1, 1, kappa_3,
+      kappa_2, kappa_3, 1
+    ),
+    nrow = 3, byrow = TRUE
+  )
+
+  samples <- mvrnorm(n = n, mu = mu, Sigma = Sigma)
+
+  # Create dataframe and transform to ranks in [0,1]
+  df <- data.frame(Y = samples[, 1], X = samples[, 2], Z = samples[, 3])
+  df$rank_Y <- pnorm(df$Y - mu[1])
+  df$rank_X <- pnorm(df$X - mu[2])
+  df$rank_Z <- pnorm(df$Z - mu[3])
+
+  df$emp_rank_Y <- rank(df$Y) / length(df$Y)
+  df$emp_rank_X <- rank(df$X) / length(df$X)
+  df$emp_rank_Z <- rank(df$Z) / length(df$Z)
+  return(df)
+}
+
+compute_iv_model <- function(df) {
+  iv_model <- ivreg::ivreg(emp_rank_Y ~ emp_rank_X | emp_rank_Z, data = df)
+  return(iv_model)
+}
+
+compute_var <- function(df) {
+  model <- ivregranks(r(Y) ~ r(X) | r(Z), data = df)
+  return(vcov(model))
+}
+
+results <- list()
+estm_list <- numeric(nrow(params))
+
+S <- 10000
+
+j <- 5
+estm <- matrix(NA, nrow = S, ncol = 2)
+ivregranks_varest <- array(NA, dim = c(S, 2, 2))
+baseline_varest <- array(NA, dim = c(S, 2, 2))
+n <- params$n[j]
+
+for (s in 1:S) {
+  df <- gen_data(
+    n,
+    kappa_1 = params$kappa_1[j],
+    kappa_2 = params$kappa_2[j],
+    kappa_3 = params$kappa_3[j],
+    mu = params$mu[[j]]
+  )
+
+  iv_model <- compute_iv_model(df)
+  coef_estimate <- coef(iv_model)
+  baseline_vcov_estimate <- vcov(iv_model)
+
+  estm[s, ] <- coef_estimate # Store IV estimate of coefficients
+  ivregranks_varest[s, , ] <- compute_var(df) # Store variance estimate
+  baseline_varest[s, , ] <- baseline_vcov_estimate
+}
+
+# Store empirical variance
+results <- list(
+  params = params[j, ],
+  var_iv_emp = n * cov(estm),
+  var_iv_est = n * apply(ivregranks_varest, 2:3, mean),
+  var_iv_baseline_est = n * apply(baseline_varest, 2:3, mean)
+)
+estm_list <- estm
